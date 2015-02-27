@@ -34,6 +34,7 @@ extension SKNode {
 class GameViewController: UIViewController, ADBannerViewDelegate {
     var bannerView:ADBannerView?
     override func viewDidLoad() {
+        authenticateLocalPlayer()
         super.viewDidLoad()
     
         
@@ -57,6 +58,16 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
 
             
             
+           
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
@@ -66,12 +77,32 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
             
             skView.presentScene(scene)
             
-
+            
+            
+            
         }
         
-       
         
         
+        
+    }
+    
+    
+    
+    
+    func authenticateLocalPlayer(){
+        var localPlayer = GKLocalPlayer.localPlayer()
+        localPlayer.authenticateHandler = {(viewController, error) -> Void in
+            
+            if (viewController != nil) {
+                //These 2 lines are the only parts that have been changed
+                let vc: UIViewController = self.view.window!.rootViewController!
+                vc.presentViewController(viewController, animated: true, completion: nil)
+            }
+            else {
+                println((GKLocalPlayer.localPlayer().authenticated))
+            }
+        }
     }
     
     func loadAds() {
@@ -136,6 +167,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
             var scoreReporter = GKScore(leaderboardIdentifier: "Swimmyleader21") //leaderboard id here
             
             scoreReporter.value = Int64(score) //score variable here (same as above)
+            println("sucess")
             
             var scoreArray: [GKScore] = [scoreReporter]
             

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E9A590F4-D094-4762-91BC-CB28711F9E1E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Swimmy Frog</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4CEE996DB16730DC898E8A9C7A67B0C1506A6195</key>
+		<string>https://github.com/Garrettogrady/Swimmy-Frog.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Swimmy Frog.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4CEE996DB16730DC898E8A9C7A67B0C1506A6195</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Garrettogrady/Swimmy-Frog.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4CEE996DB16730DC898E8A9C7A67B0C1506A6195</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4CEE996DB16730DC898E8A9C7A67B0C1506A6195</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Flappy%20Birddy</string>
+		</dict>
+	</array>
+</dict>
+</plist>

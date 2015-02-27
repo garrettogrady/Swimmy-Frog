@@ -11,7 +11,7 @@ import UIKit
 import GameKit
 
 
-class PlayScene: SKScene, SKPhysicsContactDelegate {
+class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelegate {
     
     var bird = SKSpriteNode()
     var gameIsPlaying = false
@@ -92,6 +92,22 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    //shows leaderboard screen
+    func showLeader() {
+        var vc = self.view?.window?.rootViewController
+        var gc = GKGameCenterViewController()
+        gc.gameCenterDelegate = self
+        vc?.presentViewController(gc, animated: true, completion: nil)
+    }
+    
+    //hides leaderboard screen
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!)
+    {
+        gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+
+    
     func makeBackground() {
         var bgTexture = SKTexture(imageNamed: "bg.png")
         var movebg = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 9)
@@ -118,7 +134,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
     func makePipes() {
         
         if(gameOver == 0) {
-            let gapHeight = bird.size.height * 3.75
+            let gapHeight = bird.size.height * 2.75
             
             var movementAmount = arc4random() % UInt32(self.frame.size.height / 3)
             
@@ -183,7 +199,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
         
         if contact.bodyA.categoryBitMask == gapGroup || contact.bodyB.categoryBitMask == gapGroup {
             
-            score++
+            score = score + 250
             
             scoreLabel.text = "\(score)"
         
@@ -210,9 +226,15 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                     newHighScore.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 50)
                     
                     
+                    GameViewController().saveHighscore(score)
+                    let alert = UIAlertView(title: "Congrats",
+                        message: "Your new highscore has been posted to the leaderboard",
+                        delegate: self,
+                        cancelButtonTitle: "Ok")
+                    alert.show()
+
                     
-                    
-                    let leaderboardName = "Swimmyleader21"
+                   /* let leaderboardName = "Swimmyleader21"
                     let scoreObj = GKScore(leaderboardIdentifier: leaderboardName)
                     scoreObj.context = 0
                     scoreObj.value = Int64(highscore)
@@ -222,11 +244,14 @@ class PlayScene: SKScene, SKPhysicsContactDelegate {
                             delegate: self, 
                             cancelButtonTitle: "Ok")
                         alert.show()
-                    })
+                    }) */
                     
                     
                     
                 }
+                
+                
+              
                 
                 var highScoreShow = NSUserDefaults().integerForKey("highscore")
                 
