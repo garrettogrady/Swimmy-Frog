@@ -19,12 +19,14 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
     var labelHolder = SKSpriteNode()
     var highScoreLabel = SKLabelNode()
     var newHighScore = SKLabelNode()
+    var restart = SKSpriteNode()
     
     var gapGroup:UInt32 = 0 << 3
     
     var score = 0
     var scoreLabel = SKLabelNode()
     var gameOverLabel = SKLabelNode()
+    var leaderButton = SKLabelNode()
     
     let birdGroup:UInt32 = 1
     let objectGroup:UInt32 = 2
@@ -199,7 +201,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
         
         if contact.bodyA.categoryBitMask == gapGroup || contact.bodyB.categoryBitMask == gapGroup {
             
-            score = score + 250
+            score++
             
             scoreLabel.text = "\(score)"
         
@@ -256,6 +258,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
                 var highScoreShow = NSUserDefaults().integerForKey("highscore")
                 
                 highScoreLabel.text = "Highscore: \(highScoreShow)"
+                 highScoreLabel.zPosition = 10
                
                 highScoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 50)
 
@@ -281,6 +284,13 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
                 gameOverLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 60, CGRectGetMidY(self.frame))
 
                 labelHolder.addChild(gameOverLabel)
+                
+               leaderButton.fontName = "Wawati"
+                leaderButton.fontSize = 20
+              leaderButton.text = "Leaderboard"
+             leaderButton.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 75)
+                
+                labelHolder.addChild(leaderButton)
             }
         }
         
@@ -294,12 +304,31 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
         
         
         
+        
+        
         if (gameOver == 0) {
             
             bird.physicsBody?.velocity = CGVectorMake(0, 0)
             bird.physicsBody?.applyImpulse(CGVectorMake(0, 50))
             
         } else {
+            
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                let node = self.nodeAtPoint(location)
+                if node == leaderButton {
+                    showLeader()
+                    
+                }
+            }
+
+            
+            for touch: AnyObject in touches {
+                let location = touch.locationInNode(self)
+                let node = self.nodeAtPoint(location)
+                if node == gameOverLabel {
+                    println("Hello!!!!")
+
             score = 0
             scoreLabel.text = "0"
             
@@ -318,9 +347,13 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
             movingObjects.speed = 1
         
         }
+            }
         
         
         
+        
+        
+    }
         
     }
     
