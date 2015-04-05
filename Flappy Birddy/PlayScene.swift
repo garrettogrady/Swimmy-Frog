@@ -142,7 +142,11 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
             
             var pipeOffSet = CGFloat(movementAmount) - self.frame.size.height / 6
             
-            var movePipes = SKAction.moveByX(-self.frame.size.width * 2, y: 0, duration: NSTimeInterval(self.frame.size.width / 100))
+            var speed = Double(score)
+            
+            var additions = CGFloat(Double((2) * ((speed/38.0) + 1)))
+            
+            var movePipes = SKAction.moveByX(-self.frame.size.width * additions, y: 0, duration: NSTimeInterval(self.frame.size.width / 50))
             
             var removePipes = SKAction.removeFromParent()
             
@@ -309,7 +313,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
         if (gameOver == 0) {
             
             bird.physicsBody?.velocity = CGVectorMake(0, 0)
-            bird.physicsBody?.applyImpulse(CGVectorMake(0, 50))
+            bird.physicsBody?.applyImpulse(CGVectorMake(0, 40))
             
         } else {
             
