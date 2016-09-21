@@ -9,5 +9,8 @@ This was my first app I created and submitted to the App Store
 
 Download on the [appstore](https://itunes.apple.com/us/app/swimmy-froggy/id959782804?ls=1&mt=8) now
 
-![](screenshot1.jpg) ![](screenshot2.jpg)
+Screenshot 1             |  Screenshot 2
+:-------------------------:|:-------------------------:
+![](screenshot1.jpg)  |  ![](screenshot2.jpg)
+ 
 
