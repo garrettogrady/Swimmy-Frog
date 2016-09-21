@@ -11,10 +11,10 @@ Download on the [appstore](https://itunes.apple.com/us/app/swimmy-froggy/id95978
 
 <table>
   <tr>
-    ![](screenshot2.jpg)
+    <img src'"screenshot2.jpg">
   </tr>
   <tr>
-    ![](screenshot1.jpg)
+    <img src'"screenshot1.jpg">
   </tr>
 </table>
 
