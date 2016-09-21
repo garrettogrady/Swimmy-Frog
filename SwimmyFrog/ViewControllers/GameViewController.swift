@@ -11,13 +11,13 @@ import SpriteKit
 import iAd
 import GameKit
 
-let adBannerView = ADBannerView(frame: CGRect.zeroRect)
+let adBannerView = ADBannerView(frame: CGRect.zero)
 
 extension SKNode {
     class func unarchiveFromFile(file : NSString) -> SKNode? {
         
         
-        if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
+        if let path = NSBundle.mainBundle().pathForResource(file as String, ofType: "sks") {
             var sceneData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
             var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
             
@@ -37,37 +37,15 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         authenticateLocalPlayer()
         super.viewDidLoad()
     
-        
 
-
-        
-        
-        
-    
         
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
-            let skView = self.view as SKView
+            let skView = self.view as! SKView
             //skView.showsFPS = true
             //kView.showsNodeCount = true
             loadAds()
-      
-
-            
-
-
-            
-            
-           
-            
-            
-            
-            
-            
-            
-            
-            
-            
+   
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
@@ -78,16 +56,11 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
             skView.presentScene(scene)
             
             
-            
-            
         }
-        
-        
-        
+       
         
     }
-    
-    
+
     
     
     func authenticateLocalPlayer(){
@@ -100,7 +73,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
                 vc.presentViewController(viewController, animated: true, completion: nil)
             }
             else {
-                println((GKLocalPlayer.localPlayer().authenticated))
+                print((GKLocalPlayer.localPlayer().authenticated))
             }
         }
     }
@@ -143,11 +116,11 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> Int {
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+            return UIInterfaceOrientationMask.AllButUpsideDown
         } else {
-            return Int(UIInterfaceOrientationMask.All.rawValue)
+            return UIInterfaceOrientationMask.All
         }
     }
     override func didReceiveMemoryWarning() {
@@ -159,7 +132,7 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
     
   
     
-        func saveHighscore(score:Int) {
+func saveHighscore(score:Int) {
         
         //check if user is signed in
         if GKLocalPlayer.localPlayer().authenticated {
@@ -167,13 +140,13 @@ class GameViewController: UIViewController, ADBannerViewDelegate {
             var scoreReporter = GKScore(leaderboardIdentifier: "Swimmyleader21") //leaderboard id here
             
             scoreReporter.value = Int64(score) //score variable here (same as above)
-            println("sucess")
+            print("sucess")
             
             var scoreArray: [GKScore] = [scoreReporter]
             
             GKScore.reportScores(scoreArray, {(error : NSError!) -> Void in
-                if error != nil {
-                    println("error")
+                if (error != nil) {
+                    print("error")
                 }
             })
             

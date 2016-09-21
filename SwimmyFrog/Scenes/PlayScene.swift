@@ -60,11 +60,11 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
         
         
         
-        var birdTexture = SKTexture(imageNamed: "flappy1.png")
-        var birdTexture2 = SKTexture(imageNamed: "flappy2.png")
+        let birdTexture = SKTexture(imageNamed: "flappy1.png")
+        let birdTexture2 = SKTexture(imageNamed: "flappy2.png")
         
-        var animation = SKAction.animateWithTextures([birdTexture, birdTexture2], timePerFrame: 1)
-        var makeBirdFlap = SKAction.repeatActionForever(animation)
+        let animation = SKAction.animateWithTextures([birdTexture, birdTexture2], timePerFrame: 1)
+        let makeBirdFlap = SKAction.repeatActionForever(animation)
         
         bird = SKSpriteNode(texture: birdTexture)
         bird.position = CGPoint(x: CGRectGetMidX(self.frame) - 100, y: CGRectGetMidY(self.frame))
@@ -81,7 +81,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
         bird.zPosition = 10
         self.addChild(bird)
         
-        var ground = SKNode()
+        let ground = SKNode()
         ground.position = CGPointMake(0, 0)
         ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, 1))
         ground.physicsBody?.dynamic = false
@@ -96,14 +96,14 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
     
     //shows leaderboard screen
     func showLeader() {
-        var vc = self.view?.window?.rootViewController
-        var gc = GKGameCenterViewController()
+        let vc = self.view?.window?.rootViewController
+        let gc = GKGameCenterViewController()
         gc.gameCenterDelegate = self
         vc?.presentViewController(gc, animated: true, completion: nil)
     }
     
     //hides leaderboard screen
-    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!)
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController)
     {
         gameCenterViewController.dismissViewControllerAnimated(true, completion: nil)
         
@@ -111,10 +111,10 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
 
     
     func makeBackground() {
-        var bgTexture = SKTexture(imageNamed: "bg.png")
-        var movebg = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 9)
-        var replacebg = SKAction.moveByX(bgTexture.size().width, y: 0, duration: 0)
-        var movebgForever = SKAction.repeatActionForever(SKAction.sequence([movebg, replacebg]))
+        let bgTexture = SKTexture(imageNamed: "bg.png")
+        let movebg = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 9)
+        let replacebg = SKAction.moveByX(bgTexture.size().width, y: 0, duration: 0)
+        let movebgForever = SKAction.repeatActionForever(SKAction.sequence([movebg, replacebg]))
         
         
         for var i:CGFloat=0; i<3; i++ {
@@ -138,23 +138,23 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
         if(gameOver == 0) {
             let gapHeight = bird.size.height * 2.75
             
-            var movementAmount = arc4random() % UInt32(self.frame.size.height / 3)
+            let movementAmount = arc4random() % UInt32(self.frame.size.height / 3)
             
-            var pipeOffSet = CGFloat(movementAmount) - self.frame.size.height / 6
+            let pipeOffSet = CGFloat(movementAmount) - self.frame.size.height / 6
             
-            var speed = Double(score)
+            let speed = Double(score)
             
-            var additions = CGFloat(Double((2) * ((speed/38.0) + 1)))
+            let additions = CGFloat(Double((2) * ((speed/38.0) + 1)))
             
-            var movePipes = SKAction.moveByX(-self.frame.size.width * additions, y: 0, duration: NSTimeInterval(self.frame.size.width / 50))
+            let movePipes = SKAction.moveByX(-self.frame.size.width * additions, y: 0, duration: NSTimeInterval(self.frame.size.width / 50))
             
-            var removePipes = SKAction.removeFromParent()
+            let removePipes = SKAction.removeFromParent()
             
-            var moveAndRemovePipes = SKAction.sequence([movePipes, removePipes])
+            let moveAndRemovePipes = SKAction.sequence([movePipes, removePipes])
             
             
-            var pipe1Texture = SKTexture(imageNamed: "pipe1.png")
-            var pipe1 = SKSpriteNode(texture: pipe1Texture)
+            let pipe1Texture = SKTexture(imageNamed: "pipe1.png")
+            let pipe1 = SKSpriteNode(texture: pipe1Texture)
             pipe1.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetMidY(self.frame) + pipe1.size.height / 2 + gapHeight / 2 + pipeOffSet)
             pipe1.runAction(moveAndRemovePipes)
             pipe1.zPosition = -9
@@ -163,8 +163,8 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
             pipe1.physicsBody?.categoryBitMask = objectGroup
             movingObjects.addChild(pipe1)
             
-            var pipe2Texture = SKTexture(imageNamed: "pipe2.png")
-            var pipe2 = SKSpriteNode(texture: pipe2Texture)
+            let pipe2Texture = SKTexture(imageNamed: "pipe2.png")
+            let pipe2 = SKSpriteNode(texture: pipe2Texture)
             pipe2.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width, y: CGRectGetMidY(self.frame) - pipe2.size.height / 2 - gapHeight / 2 + pipeOffSet)
             pipe2.runAction(moveAndRemovePipes)
             pipe2.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(pipe2.size.width / 3.5, pipe2.size.height))
@@ -173,7 +173,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
             pipe2.physicsBody?.categoryBitMask = objectGroup
             movingObjects.addChild(pipe2)
             
-            var gap = SKNode()
+            let gap = SKNode()
             gap.position = CGPoint(x: CGRectGetMidX(self.frame) + self.frame.size.width + 50, y: CGRectGetMidY(self.frame) + pipeOffSet)
             gap.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(0.1, gapHeight / 2))
             gap.runAction(moveAndRemovePipes)
@@ -217,9 +217,9 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
        
                 //var highScore = defaults.integerForKey("highScore")
                 
-            var scoreboard = SKSpriteNode(imageNamed: "scoreboard.png")
+            let scoreboard = SKSpriteNode(imageNamed: "scoreboard.png")
             
-                var highscore = NSUserDefaults().integerForKey("highscore")
+                let highscore = NSUserDefaults().integerForKey("highscore")
                 
                 
 
@@ -259,7 +259,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
                 
               
                 
-                var highScoreShow = NSUserDefaults().integerForKey("highscore")
+                let highScoreShow = NSUserDefaults().integerForKey("highscore")
                 
                 highScoreLabel.text = "Highscore: \(highScoreShow)"
                  highScoreLabel.zPosition = 10
@@ -304,11 +304,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         /* Called when a touch begins */
-        
-        
-        
-        
-        
+
         
         if (gameOver == 0) {
             
@@ -331,7 +327,7 @@ class PlayScene: SKScene, SKPhysicsContactDelegate, GKGameCenterControllerDelega
                 let location = touch.locationInNode(self)
                 let node = self.nodeAtPoint(location)
                 if node == gameOverLabel {
-                    println("Hello!!!!")
+                    print("Hello!!!!")
 
             score = 0
             scoreLabel.text = "0"

@@ -20,11 +20,11 @@ class GameScene: SKScene {
     
         
         func makeBackground() {
-            var bgTexture = SKTexture(imageNamed: "bg.png")
+            let bgTexture = SKTexture(imageNamed: "bg.png")
             bg.zPosition = -10
-            var movebg = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 9)
-            var replacebg = SKAction.moveByX(bgTexture.size().width, y: 0, duration: 0)
-            var movebgForever = SKAction.repeatActionForever(SKAction.sequence([movebg, replacebg]))
+            let movebg = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 9)
+            let replacebg = SKAction.moveByX(bgTexture.size().width, y: 0, duration: 0)
+            let movebgForever = SKAction.repeatActionForever(SKAction.sequence([movebg, replacebg]))
             
             
             for var i:CGFloat=0; i<3; i++ {
@@ -56,7 +56,7 @@ class GameScene: SKScene {
            
             let location = touch.locationInNode(self)
             if self.nodeAtPoint(location) == self.playButton {
-                var scene = PlayScene(size: self.size)
+                let scene = PlayScene(size: self.size)
                 let skView = self.view as SKView!
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .ResizeFill
