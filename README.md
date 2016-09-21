@@ -7,4 +7,4 @@ This was my first app I created and submitted to the App Store
 * SpriteKit
 * Many more features
 
-Download on the ![appstore](https://itunes.apple.com/us/app/swimmy-froggy/id959782804?ls=1&mt=8) now
+Download on the [appstore](https://itunes.apple.com/us/app/swimmy-froggy/id959782804?ls=1&mt=8) now
